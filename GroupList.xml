@@ -1,0 +1,134 @@
+<GuiXml>
+  <Controls>
+
+    <Label name="GroupMenu_GroupListHeadersLeader" inherits="ZO_GroupHeader" horizontalAlignment="CENTER" virtual="true">
+      <Anchor point="LEFT" relativeTo="$(parent)" relativePoint="LEFT" />
+    </Label>
+
+    <Label name="GroupMenu_GroupListHeadersMemberIndex" inherits="ZO_GroupHeader" horizontalAlignment="RIGHT" virtual="true">
+      <Anchor point="LEFT" relativeTo="$(parent)CharacterName" relativePoint="RIGHT" offsetX="ZO_KEYBOARD_GROUP_LIST_PADDING_X" />
+    </Label>
+
+    <Label name="GroupMenu_GroupListHeadersName" inherits="ZO_GroupHeader" horizontalAlignment="LEFT" virtual="true">
+      <Anchor point="LEFT" relativeTo="$(parent)MemberIndex" relativePoint="RIGHT" offsetX="ZO_KEYBOARD_GROUP_LIST_PADDING_X" />
+      <OnInitialized>
+        self:SetText(GroupMenu.Strings.Name)
+      </OnInitialized>
+    </Label>
+
+    <Label name="GroupMenu_GroupListHeadersChampionPoints" inherits="ZO_GroupHeader" horizontalAlignment="CENTER" virtual="true">
+      <Anchor point="LEFT" relativeTo="$(parent)Role" relativePoint="RIGHT" offsetX="ZO_KEYBOARD_GROUP_LIST_PADDING_X" />
+      <OnInitialized>
+        self:SetText(GroupMenu.Strings.ChampionPoints)
+      </OnInitialized>
+    </Label>
+
+    <Label name="GroupMenu_GroupListHeadersAlliance" inherits="ZO_GroupHeader" horizontalAlignment="CENTER" wrapMode="TRUNCATE" virtual="true">
+      <Anchor point="LEFT" relativeTo="$(parent)ChampionPoints" relativePoint="RIGHT" offsetX="ZO_KEYBOARD_GROUP_LIST_PADDING_X" />
+      <OnInitialized>
+        self:SetText(GroupMenu.Strings.Alliance)
+      </OnInitialized>
+    </Label>
+
+    <Label name="GroupMenu_GroupListHeadersAllianceRank" inherits="ZO_GroupHeader" horizontalAlignment="CENTER" virtual="true">
+      <Anchor point="LEFT" relativeTo="$(parent)Alliance" relativePoint="RIGHT" offsetX="ZO_KEYBOARD_GROUP_LIST_PADDING_X" />
+      <OnInitialized>
+        self:SetText(GroupMenu.Strings.AllianceRank)
+      </OnInitialized>
+    </Label>
+
+    <Label name="GroupMenu_GroupListHeadersRace" inherits="ZO_GroupHeader" horizontalAlignment="CENTER" virtual="true">
+      <Anchor point="LEFT" relativeTo="$(parent)AllianceRank" relativePoint="RIGHT" offsetX="ZO_KEYBOARD_GROUP_LIST_PADDING_X" />
+      <OnInitialized>
+        self:SetText(GroupMenu.Strings.Race)
+      </OnInitialized>
+    </Label>
+
+    <Label name="GroupMenu_GroupListHeadersGender" inherits="ZO_GroupHeader" horizontalAlignment="CENTER" virtual="true">
+      <Anchor point="LEFT" relativeTo="$(parent)Race" relativePoint="RIGHT" offsetX="ZO_KEYBOARD_GROUP_LIST_PADDING_X" />
+      <OnInitialized>
+        self:SetText(GroupMenu.Strings.Gender)
+      </OnInitialized>
+    </Label>
+
+    <Label name="GroupMenu_GroupListHeadersSocial" inherits="ZO_GroupHeader" horizontalAlignment="CENTER" virtual="true">
+      <Anchor point="LEFT" relativeTo="$(parent)Gender" relativePoint="RIGHT" offsetX="ZO_KEYBOARD_GROUP_LIST_PADDING_X" />
+      <OnInitialized>
+        self:SetText(GroupMenu.Strings.Social)
+      </OnInitialized>
+    </Label>
+
+    <Label name="GroupMenu_ListRowLabel" inherits="ZO_GroupListRowLabel" horizontalAlignment="CENTER" virtual="true">
+      <OnInitialized>
+        self.row = self:GetParent()
+      </OnInitialized>
+      <OnMouseEnter>
+        GroupMenu.GroupList.EventHandlers.EventRowItemMouseEnter(self)
+      </OnMouseEnter>
+      <OnMouseExit>
+        ZO_GroupListRowChild_OnMouseExit(self)
+      </OnMouseExit>
+      <OnMouseUp>
+        ZO_GroupListRow_OnMouseUp(self.row, button, upInside)
+      </OnMouseUp>
+    </Label>
+
+    <Texture name="GroupMenu_AllianceIconTexture" mouseEnabled="true" layer="OVERLAY" textureFile="EsoUI/Art/Stats/AllianceBadge_Aldmeri.dds" virtual="true">
+      <Anchor point="CENTER" />
+      <Dimensions x="26" y="26" />
+      <OnInitialized>
+        self.tooltip = ''
+        self.row = self:GetParent():GetParent()
+      </OnInitialized>
+      <OnMouseEnter>
+        GroupMenu.GroupList.EventHandlers.EventRowItemMouseEnter(self)
+      </OnMouseEnter>
+      <OnMouseExit>
+        ZO_GroupListRowChild_OnMouseExit(self)
+      </OnMouseExit>
+    </Texture>
+
+    <Label name="GroupMenu_GroupListRowMemberIndex" inherits="GroupMenu_ListRowLabel" horizontalAlignment="RIGHT" virtual="true">
+      <Anchor point="LEFT" relativeTo="$(parent)CharacterName" relativePoint="RIGHT" offsetX="ZO_KEYBOARD_GROUP_LIST_PADDING_X" />
+    </Label>
+
+    <Label name="GroupMenu_GroupListRowName" mouseEnabled="true" inherits="GroupMenu_ListRowLabel" horizontalAlignment="LEFT" virtual="true">
+      <Anchor point="LEFT" relativeTo="$(parent)MemberIndex" relativePoint="RIGHT" offsetX="ZO_KEYBOARD_GROUP_LIST_PADDING_X" />
+    </Label>
+
+    <Label name="GroupMenu_GroupListRowCustomLevel" inherits="GroupMenu_ListRowLabel" virtual="true">
+      <Anchor point="LEFT" relativeTo="$(parent)Level" relativePoint="RIGHT" offsetX="ZO_KEYBOARD_GROUP_LIST_PADDING_X" />
+    </Label>
+
+    <Label name="GroupMenu_GroupListRowChampionPoints" inherits="GroupMenu_ListRowLabel" virtual="true">
+      <Anchor point="LEFT" relativeTo="$(parent)Role" relativePoint="RIGHT" offsetX="ZO_KEYBOARD_GROUP_LIST_PADDING_X" />
+    </Label>
+
+    <Control name="GroupMenu_GroupListRowAlliance" virtual="true">
+      <Anchor point="LEFT" relativeTo="$(parent)ChampionPoints" relativePoint="RIGHT" offsetX="ZO_KEYBOARD_GROUP_LIST_PADDING_X" />
+      <Controls>
+        <Texture name="$(parent)Texture" inherits="GroupMenu_AllianceIconTexture"></Texture>
+      </Controls>
+    </Control>
+
+    <Control name="GroupMenu_GroupListRowAllianceRank" virtual="true">
+      <Anchor point="LEFT" relativeTo="$(parent)Alliance" relativePoint="RIGHT" offsetX="ZO_KEYBOARD_GROUP_LIST_PADDING_X" />
+      <Controls>
+        <Texture name="$(parent)Texture" inherits="GroupMenu_AllianceIconTexture"></Texture>
+      </Controls>
+    </Control>
+
+  <Label name="GroupMenu_GroupListRowRace" inherits="GroupMenu_ListRowLabel" virtual="true">
+        <Anchor point="LEFT" relativeTo="$(parent)AllianceRank" relativePoint="RIGHT" offsetX="ZO_KEYBOARD_GROUP_LIST_PADDING_X" />
+    </Label>
+
+    <Label name="GroupMenu_GroupListRowGender" inherits="GroupMenu_ListRowLabel" virtual="true">
+      <Anchor point="LEFT" relativeTo="$(parent)Race" relativePoint="RIGHT" offsetX="ZO_KEYBOARD_GROUP_LIST_PADDING_X" />
+    </Label>
+
+    <Label name="GroupMenu_GroupListRowSocial" inherits="GroupMenu_ListRowLabel" virtual="true">
+      <Anchor point="LEFT" relativeTo="$(parent)Gender" relativePoint="RIGHT" offsetX="ZO_KEYBOARD_GROUP_LIST_PADDING_X" />
+    </Label>
+
+  </Controls>
+</GuiXml>
